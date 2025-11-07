@@ -1,8 +1,8 @@
 'use strict';
 
-const { buttonStart } = require('../scripts/main');
+import { buttonStart } from "../scripts/main.js";
 
-class Game {
+export default class Game {
   constructor(initialState) {
     this.board = initialState || [
       [0, 0, 0, 0],
@@ -12,30 +12,30 @@ class Game {
     ];
 
     this.score = 0;
-    this.status = 'idle';
-    this.gameScore = document.querySelector('.game-score');
+    this.status = "idle";
+    this.gameScore = document.querySelector(".game-score");
     this.firstMove = true;
-    this.cells = document.querySelectorAll('.field-cell');
+    this.cells = document.querySelectorAll(".field-cell");
   }
 
   bindControls() {
-    document.addEventListener('keydown', (e) => {
-      if (this.status !== 'playing') {
+    document.addEventListener("keydown", (e) => {
+      if (this.status !== "playing") {
         return;
       }
       e.preventDefault();
 
       switch (e.key) {
-        case 'ArrowLeft':
+        case "ArrowLeft":
           this.moveLeft();
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           this.moveRight();
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           this.moveUp();
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           this.moveDown();
           break;
         default:
@@ -72,9 +72,9 @@ class Game {
 
     if (this.hasBoardChanged(oldBoard, this.board)) {
       if (this.firstMove) {
-        buttonStart.classList.remove('start');
-        buttonStart.classList.add('restart');
-        buttonStart.textContent = 'Restart';
+        buttonStart.classList.remove("start");
+        buttonStart.classList.add("restart");
+        buttonStart.textContent = "Restart";
         this.firstMove = false;
       }
 
@@ -110,9 +110,9 @@ class Game {
 
     if (this.hasBoardChanged(oldBoard, this.board)) {
       if (this.firstMove) {
-        buttonStart.classList.remove('start');
-        buttonStart.classList.add('restart');
-        buttonStart.textContent = 'Restart';
+        buttonStart.classList.remove("start");
+        buttonStart.classList.add("restart");
+        buttonStart.textContent = "Restart";
         this.firstMove = false;
       }
 
@@ -159,9 +159,9 @@ class Game {
 
     if (this.hasBoardChanged(oldBoard, this.board)) {
       if (this.firstMove) {
-        buttonStart.classList.remove('start');
-        buttonStart.classList.add('restart');
-        buttonStart.textContent = 'Restart';
+        buttonStart.classList.remove("start");
+        buttonStart.classList.add("restart");
+        buttonStart.textContent = "Restart";
         this.firstMove = false;
       }
 
@@ -208,9 +208,9 @@ class Game {
 
     if (this.hasBoardChanged(oldBoard, this.board)) {
       if (this.firstMove) {
-        buttonStart.classList.remove('start');
-        buttonStart.classList.add('restart');
-        buttonStart.textContent = 'Restart';
+        buttonStart.classList.remove("start");
+        buttonStart.classList.add("restart");
+        buttonStart.textContent = "Restart";
         this.firstMove = false;
       }
 
@@ -263,8 +263,8 @@ class Game {
         const value = this.board[r][c];
         const cell = this.cells[r * 4 + c];
 
-        cell.className = 'field-cell';
-        cell.textContent = value === 0 ? '' : value;
+        cell.className = "field-cell";
+        cell.textContent = value === 0 ? "" : value;
 
         if (value > 0) {
           cell.classList.add(`field-cell--${value}`);
@@ -278,24 +278,24 @@ class Game {
   }
 
   renderStatus() {
-    const msgStart = document.querySelector('.message-start');
-    const msgWin = document.querySelector('.message-win');
-    const msgLose = document.querySelector('.message-lose');
+    const msgStart = document.querySelector(".message-start");
+    const msgWin = document.querySelector(".message-win");
+    const msgLose = document.querySelector(".message-lose");
 
-    msgStart.classList.add('hidden');
-    msgWin.classList.add('hidden');
-    msgLose.classList.add('hidden');
+    msgStart.classList.add("hidden");
+    msgWin.classList.add("hidden");
+    msgLose.classList.add("hidden");
 
-    if (this.status === 'idle') {
-      msgStart.classList.remove('hidden');
+    if (this.status === "idle") {
+      msgStart.classList.remove("hidden");
     }
 
-    if (this.status === 'win') {
-      msgWin.classList.remove('hidden');
+    if (this.status === "win") {
+      msgWin.classList.remove("hidden");
     }
 
-    if (this.status === 'lose') {
-      msgLose.classList.remove('hidden');
+    if (this.status === "lose") {
+      msgLose.classList.remove("hidden");
     }
   }
 
@@ -303,7 +303,7 @@ class Game {
     for (let r = 0; r < 4; r++) {
       for (let c = 0; c < 4; c++) {
         if (this.board[r][c] === 2048) {
-          this.status = 'win';
+          this.status = "win";
 
           return true;
         }
@@ -321,27 +321,27 @@ class Game {
     for (let r = 0; r < 4; r++) {
       for (let c = 0; c < 4; c++) {
         if (
-          (c < 3 && this.board[r][c] === this.board[r][c + 1])
-          || (r < 3 && this.board[r][c] === this.board[r + 1][c])
+          (c < 3 && this.board[r][c] === this.board[r][c + 1]) ||
+          (r < 3 && this.board[r][c] === this.board[r + 1][c])
         ) {
           return false;
         }
       }
     }
 
-    this.status = 'lose';
+    this.status = "lose";
 
     return true;
   }
 
   start() {
-    this.status = 'playing';
+    this.status = "playing";
     this.addNewCell();
     this.addNewCell();
 
-    buttonStart.classList.remove('start');
-    buttonStart.classList.add('restart');
-    buttonStart.textContent = 'Restart';
+    buttonStart.classList.remove("start");
+    buttonStart.classList.add("restart");
+    buttonStart.textContent = "Restart";
     this.firstMove = false;
 
     this.render();
@@ -356,12 +356,12 @@ class Game {
     ];
 
     this.score = 0;
-    this.status = 'idle';
+    this.status = "idle";
     this.firstMove = true;
 
-    buttonStart.classList.remove('restart');
-    buttonStart.classList.add('start');
-    buttonStart.textContent = 'Start';
+    buttonStart.classList.remove("restart");
+    buttonStart.classList.add("start");
+    buttonStart.textContent = "Start";
 
     this.render();
   }
