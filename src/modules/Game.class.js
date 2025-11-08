@@ -343,5 +343,3 @@ export default class Game {
     this.render();
   }
 }
-
-module.exports = Game;
